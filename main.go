@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/rizlantamima/golang-web-boilerplate/config"
@@ -23,9 +22,8 @@ func main() {
 
 	e := echo.New()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	config.InitRoutes(e)
+
 	portENV := configuration.GetString("APP_PORT", "3000")
 	e.Logger.Fatal(e.Start(":" + portENV))
 }
